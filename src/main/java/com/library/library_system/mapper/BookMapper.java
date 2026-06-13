@@ -2,6 +2,7 @@ package com.library.library_system.mapper;
 
 import com.library.library_system.entity.Book;
 import org.apache.ibatis.annotations.*;
+//import org.apache.ibatis.annotations.Update;
 
 
 import java.util.List;
@@ -29,6 +30,9 @@ public interface BookMapper {
 
     @Update("update book set stock = stock + 1 where id = #{id}")
     int returnBook(Integer id);
+
+//    @Update("update book set stock = stock + 1 where id = #{id}")
+//    int returnBook(Integer id);
 //    @org.apache.ibatis.annotations.Delete("delete from book where id = #{id}")
 //    int deleteById(Integer id);
 }
