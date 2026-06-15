@@ -27,9 +27,11 @@ import com.library.library_system.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.library.library_system.entity.Admin;
 import com.library.library_system.service.AdminService;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -126,4 +128,11 @@ public class HelloController {
         return "用户名或密码错误";
     }
 
+    @PutMapping("/book/update")
+    public String update(@RequestBody Book book){
+
+        bookService.update(book);
+
+        return "修改成功";
+    }
 }

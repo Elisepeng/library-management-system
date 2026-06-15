@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>图书管理系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="container mt-4">
+
+<h1 class="mb-4">图书管理系统</h1>
+
+<div class="mb-3">
+
+    <input type="text"
+           id="name"
+           class="form-control mb-2"
+           placeholder="书名">
+
+    <input type="text"
+           id="author"
+           class="form-control mb-2"
+           placeholder="作者">
+
+    <input type="number"
+           id="stock"
+           class="form-control mb-2"
+           placeholder="库存">
+
+    <button class="btn btn-primary"
+            onclick="addBook()">
+        新增图书
+    </button>
+
+</div>
+
+<button onclick="loadBooks()">查询图书</button>
+
+<table class="table table-bordered">
+
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>书名</th>
+        <th>作者</th>
+        <th>库存</th>
+        <th>操作</th>
+    </tr>
+    </thead>
+
+    <tbody id="result">
+
+    </tbody>
+
+</table>
+
+<script>
+    function loadBooks(){
+
+        fetch("/books")
+            .then(response => response.json())
+            .then(data => {
+
+                let html = "";
+
+                data.forEach(book => {
+html += `
+<tr>
+<td>${book.id}</td>
+<td>${book.name}</td>
+<td>${book.author}</td>
+<td>${book.stock}</td>
+<td>
+
+<button onclick="borrowBook(${book.id})">
+借书
+</button>
+
+<button onclick="returnBook(${book.id})">
+还书
+</button>
+
+<button onclick="editBook(${book.id})">
+修改
+</button>
+
+<button onclick="deleteBook(${book.id})">
+删除
+</button>
+
+</td>
+</tr>
+`;
+                });
+
+                document.getElementById("result").innerHTML = html;
+            });
+    }
+
+    function addBook(){
+
+    let name = document.getElementById("name").value;
+    let author = document.getElementById("author").value;
+    let stock = document.getElementById("stock").value;
+
+    fetch(`/book/add?name=${name}&author=${author}&stock=${stock}`)
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            loadBooks();
+        });
+}
+
+    function deleteBook(id){
+
+    if(!confirm("确定删除吗？")){
+        return;
+    }
+
+    fetch("/book/delete/" + id)
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            loadBooks();
+        });
+}
+    function borrowBook(id){
+
+    fetch("/book/borrow/" + id)
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            loadBooks();
+        });
+}
+
+    function returnBook(id){
+
+    fetch("/book/return/" + id)
+        .then(response => response.text())
+        .then(data => {
+            alert(data);
+            loadBooks();
+        });
+}
+
+function editBook(id){
+
+    let name = prompt("请输入新书名");
+
+    let author = prompt("请输入新作者");
+
+    let stock = prompt("请输入新库存");
+
+    fetch("/book/update",{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            id:id,
+            name:name,
+            author:author,
+            stock:stock
+        })
+    })
+    .then(()=>{
+        loadBooks();
+    });
+}
+
+function editBook(id){
+
+    let name = prompt("请输入新书名");
+
+    let author = prompt("请输入新作者");
+
+    let stock = prompt("请输入新库存");
+
+    fetch("/book/update",{
+        method:"PUT",
+        headers:{
+            "Content-Type":"application/json"
+        },
+        body:JSON.stringify({
+            id:id,
+            name:name,
+            author:author,
+            stock:stock
+        })
+    })
+    .then(response=>response.text())
+    .then(data=>{
+        alert(data);
+        loadBooks();
+    });
+
+}
+    loadBooks();
+</script>
+
+</body>
+</html>
