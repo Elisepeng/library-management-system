@@ -1,76 +1,48 @@
-Library Management System
+# 图书馆管理系统
 
-项目简介
+## 项目简介
 
-基于 Spring Boot + MyBatis + MySQL 开发的图书管理系统。
+本项目是一个基于 Spring Boot + MyBatis 开发的图书馆管理系统，实现了图书管理、用户管理、图书借阅、归还等功能。
 
-实现了图书管理和管理员登录等功能。
+该项目主要用于学习 Java Web 后端开发流程，加深对 Spring Boot、MyBatis 与 MySQL 的理解。
 
-功能
 
-* 图书查询
-* 图书详情查询
-* 图书新增
-* 图书修改
-* 图书删除
-* 图书借阅
-* 图书归还
-* 管理员登录
-* Swagger API 文档
+## 技术栈
 
-技术栈
+- Java
+- Spring Boot
+- MyBatis
+- MySQL
+- HTML
+- CSS
+- JavaScript
+- Bootstrap
+- Maven
 
-* Java 21
-* Spring Boot 3
-* MyBatis
-* MySQL
-* Maven
-* Git
-* GitHub
-* Swagger(OpenAPI)
-* HTML
-* JavaScript
+## 功能模块
 
-数据库
+### 用户功能
 
-数据库名称：
+- 用户登录
+- 图书查询
+- 借阅图书
+- 归还图书
 
-library
+### 管理员功能
 
-图书表：
+- 图书管理
+- 用户管理
+- 借阅记录管理
 
-CREATE TABLE book (
-id INT PRIMARY KEY AUTO_INCREMENT,
-name VARCHAR(100) NOT NULL,
-author VARCHAR(100) NOT NULL,
-stock INT DEFAULT 0
-);
+## 项目特点
 
-项目结构
+- 基于 Spring Boot 搭建后端
+- 使用 MyBatis 操作数据库
+- MySQL 存储数据
+- 前后端通过 REST API 进行交互
 
-src
-├── controller
-├── service
-├── mapper
-├── entity
-├── resources
-│   ├── static
-│   └── application.properties
+## 页面展示
 
-运行方式
+<img width="2228" height="1203" alt="image" src="https://github.com/user-attachments/assets/7976cf99-d3d8-4e62-b4fe-ded5f4604202" />
 
-1. 创建 MySQL 数据库
-2. 配置 application.properties
-3. 启动 Spring Boot 项目
-
-访问：
-
-http://localhost:8080/login.html
-
-Swagger：
-
-http://localhost:8080/swagger-ui/index.html
-
-作者
-
-Elisepeng
+<img width="2232" height="1256" alt="image" src="https://github.com/user-attachments/assets/4851a3c7-bb59-4ded-84c0-dc763bd18a0c" />
